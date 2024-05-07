@@ -4,6 +4,7 @@ import CupControls from "./components/CupControls";
 import SleepControls from "./components/SleepControls";
 import HourIndicators from "./components/HourIndicators";
 import WaterMeter from "./components/WaterMeter";
+import CurrTimeRow from "./components/CurrTimeRow";
 
 export default function App() {
   const [consumed, setConsumed] = useState(0);
@@ -32,6 +33,8 @@ export default function App() {
       <HourIndicators wakeUpHour={wakeUpHour} sleepHour={sleepHour} />
 
       <WaterMeter consumed={consumed} target={target} />
+
+      <CurrTimeRow wakeUpHour={wakeUpHour} sleepHour={sleepHour} />
     </div>
   );
 }
