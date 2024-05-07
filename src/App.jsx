@@ -5,6 +5,16 @@ export default function App() {
   const [target, setTarget] = useState(2000);
   const [cupSize, setCupSize] = useState(200);
 
+  const percentageCompleted = () => {
+    const result = (consumed / target) * 100;
+
+    if (result > 100) {
+      return 100;
+    } else if (result >= 0 && result <= 100) {
+      return result;
+    }
+  };
+
   const handleTargetInput = (e) => {
     setTarget(parseInt(e.target.value));
   };
@@ -24,7 +34,7 @@ export default function App() {
 
   const decreaseCupSize = () => {
     const result = cupSize - 50;
-    if (result >= 0) setCupSize(result);
+    if (result > 0) setCupSize(result);
   };
 
   return (
@@ -50,14 +60,14 @@ export default function App() {
       <div className="flex items-center gap-2">
         <div className="flex flex-col gap-1 w-32">
           <button
-            className="px-4 py-2 border-black border-2 rounded-lg bg-green-400"
+            className="px-4 py-2 border-black border-2 rounded-lg text-white bg-[#277204]"
             type="button"
             onClick={addCup}
           >
             Adicionar
           </button>
           <button
-            className="px-4 py-2 border-black border-2 rounded-lg bg-red-400"
+            className="px-4 py-2 border-black border-2 rounded-lg text-white bg-[#c13434]"
             type="button"
             onClick={removeCup}
           >
@@ -65,36 +75,23 @@ export default function App() {
           </button>
         </div>
 
-        <div className="flex flex-col gap-1 w-36">
-          <button
-            className="w-24 px-4 py-2 bg-gray-700 text-white border-black border-2 rounded-lg"
-            type="button"
-            onClick={increaseCupSize}
-          >
-            +
-          </button>
-
-          <div className="flex items-center gap-1">
-            <input
-              className="px-4 py-2 w-24 text-center bg-gray-200 border-black border-2 rounded-lg"
-              type="number"
-              value={cupSize}
-              onChange={handleCupSizeInput}
-              min={0}
-              step={50}
-            />
-            <p>ml</p>
-          </div>
-
-          <button
-            className="w-24 px-4 py-2 bg-gray-700 text-white border-black border-2 rounded-lg"
-            type="button"
-            onClick={decreaseCupSize}
-          >
-            -
-          </button>
+        <div className="flex items-center gap-1">
+          <input
+            className="px-4 py-2 w-24 text-center bg-gray-200 border-black border-2 rounded-lg"
+            type="number"
+            value={cupSize}
+            onChange={handleCupSizeInput}
+            min={0}
+            step={50}
+          />
+          <p>ml</p>
         </div>
       </div>
+
+      <div
+        className="fixed bottom-0 w-dvw bg-gradient-to-b from-[#4396f4] to-[#74a7e3] -z-10"
+        style={{ height: `${percentageCompleted()}dvh` }}
+      ></div>
     </div>
   );
 }
