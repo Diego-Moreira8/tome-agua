@@ -1,4 +1,8 @@
-export default function CurrTimeRow({ wakeUpHour, sleepHour }) {
+export default function CurrTimeRow({
+  wakeUpHour,
+  sleepHour,
+  getPercentageCompleted,
+}) {
   const getPercentageElapsed = () => {
     const current = new Date();
     const totalMinutes = (sleepHour - wakeUpHour) * 60;
@@ -11,14 +15,23 @@ export default function CurrTimeRow({ wakeUpHour, sleepHour }) {
     percentageElapsed = Math.min(percentageElapsed, 100);
     percentageElapsed = Math.max(percentageElapsed, 0);
 
-    console.log(percentageElapsed);
     return percentageElapsed;
   };
 
   return (
     <div
-      className="absolute -z-10 w-dvw h-1 bg-red-500"
+      className="absolute -z-10 w-dvw"
       style={{ bottom: `${getPercentageElapsed()}%` }}
-    ></div>
+    >
+      {getPercentageCompleted() > getPercentageElapsed() ? (
+        <div className="bg-green-200 h-1">
+          <p className="pt-1 pl-2 text-xs">Continue assim!</p>
+        </div>
+      ) : (
+        <div className="bg-red-500 h-1">
+          <p className="pt-1 pl-2 text-xs">Beba água!</p>
+        </div>
+      )}
+    </div>
   );
 }
