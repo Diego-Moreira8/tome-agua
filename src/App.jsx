@@ -4,6 +4,8 @@ export default function App() {
   const [consumed, setConsumed] = useState(0);
   const [target, setTarget] = useState(2000);
   const [cupSize, setCupSize] = useState(200);
+  const [wakeUpHour, setWakeUpHour] = useState(8);
+  const [sleepHour, setSleepHour] = useState(22);
 
   const percentageCompleted = () => {
     const result = (consumed / target) * 100;
@@ -30,11 +32,20 @@ export default function App() {
     if (result >= 0) setConsumed(result);
   };
 
-  const increaseCupSize = () => setCupSize((prev) => prev + 50);
+  const handleWakeUpHourInput = (e) => {
+    const hour = e.target.value;
 
-  const decreaseCupSize = () => {
-    const result = cupSize - 50;
-    if (result > 0) setCupSize(result);
+    if (hour >= 0 || hour <= 23) {
+      setWakeUpHour(hour);
+    }
+  };
+
+  const handleSleepHourInput = (e) => {
+    const hour = e.target.value;
+
+    if (hour >= 0 || hour <= 23) {
+      setSleepHour(hour);
+    }
   };
 
   return (
@@ -86,6 +97,42 @@ export default function App() {
           />
           <p>ml</p>
         </div>
+      </div>
+
+      <div className="flex flex-col gap-2 items-end">
+        <div className="flex items-center gap-1">
+          <label htmlFor="wake-up-hour">Acordei às:</label>
+          <input
+            className="px-4 py-2 w-16 text-center bg-gray-200 rounded-lg border-black border-2"
+            type="number"
+            id="wake-up-hour"
+            value={wakeUpHour}
+            onChange={handleWakeUpHourInput}
+            min={0}
+            max={23}
+          />
+          <p>h</p>
+        </div>
+        <div className="flex items-center gap-1">
+          <label htmlFor="sleep-hour">Vou dormir por volta de:</label>
+          <input
+            className="px-4 py-2 w-16 text-center bg-gray-200 rounded-lg border-black border-2"
+            type="number"
+            id="sleep-hour"
+            value={sleepHour}
+            onChange={handleSleepHourInput}
+            min={0}
+            max={23}
+          />
+          <p>h</p>
+        </div>
+      </div>
+
+      <div></div>
+
+      <div className="fixed right-4 h-dvh flex flex-col justify-between">
+        <p className="text-right">{sleepHour}h</p>
+        <p className="text-right">{wakeUpHour}h</p>
       </div>
 
       <div
