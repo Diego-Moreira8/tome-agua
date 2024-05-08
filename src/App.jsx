@@ -1,4 +1,4 @@
-import { useState } from "react";
+import useLocalStorage from "./useLocalStorage";
 import Status from "./components/Status";
 import CupControls from "./components/CupControls";
 import SleepControls from "./components/SleepControls";
@@ -7,10 +7,10 @@ import WaterMeter from "./components/WaterMeter";
 import CurrTimeRow from "./components/CurrTimeRow";
 
 export default function App() {
-  const [consumed, setConsumed] = useState(0);
-  const [target, setTarget] = useState(2000);
-  const [wakeUpHour, setWakeUpHour] = useState(8);
-  const [sleepHour, setSleepHour] = useState(22);
+  const [consumed, setConsumed] = useLocalStorage("consumed", 0);
+  const [target, setTarget] = useLocalStorage("target", 2000);
+  const [wakeUpHour, setWakeUpHour] = useLocalStorage("wakeUpHour", 8);
+  const [sleepHour, setSleepHour] = useLocalStorage("sleepHour", 22);
 
   const changeTarget = (newTarget) => setTarget(newTarget);
   const changeConsumed = (newValue) => setConsumed(newValue);

@@ -1,7 +1,7 @@
-import { useState } from "react";
+import useLocalStorage from "../useLocalStorage";
 
 export default function CupControls({ consumed, changeConsumed }) {
-  const [cupSize, setCupSize] = useState(200);
+  const [cupSize, setCupSize] = useLocalStorage("cupSize", 200);
 
   const addCup = () => changeConsumed(consumed + cupSize);
 

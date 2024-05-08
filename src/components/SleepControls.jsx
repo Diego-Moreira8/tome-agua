@@ -5,7 +5,7 @@ export default function SleepControls({
   changeSleepHour,
 }) {
   const handleWakeUpHourInput = (e) => {
-    const hour = e.target.value;
+    const hour = parseInt(e.target.value);
 
     if (hour >= 0 || hour <= 23) {
       changeWakeUpHour(hour);
@@ -13,7 +13,7 @@ export default function SleepControls({
   };
 
   const handleSleepHourInput = (e) => {
-    const hour = e.target.value;
+    const hour = parseInt(e.target.value);
 
     if (hour >= 0 || hour <= 23) {
       changeSleepHour(hour);
